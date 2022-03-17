@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import './App.css';
 import CardListComponent from './components/card-list/CardListComponent';
+import SearchBox from './components/search-box/SearchBox';
 
  class App extends Component {
    constructor() {
@@ -20,6 +21,10 @@ import CardListComponent from './components/card-list/CardListComponent';
      // this will set the monsters state to include all the fetched users data
    }
 
+   handleChange = e => {
+     this.setState({searchField: e.target.value});
+   }
+
    render() {
      const {monsters, searchField } = this.state; // this is destructure
      // destructure is pulling properties off an object and set them to the constants
@@ -28,11 +33,8 @@ import CardListComponent from './components/card-list/CardListComponent';
      
       return (
        <div className='App'>
-         <input type='search' placeholder='search monsters' 
-          onChange={e => this.setState({searchField: e.target.value})} />
-          {/* We are defining a function, but we are not running it */}
-         {/* e is the change that is happening, target is where this change is happening, value is the change itself */}
-         {/* if we want to see or do sth with our updated state, we need to do it inside, with a second argument function following the first one*/}
+         <h1>Monsters Rolodex</h1>
+         <SearchBox placeholder='search monsters' handleChange={this.handleChange} />
          <CardListComponent monsters={filteredMonsters} /> 
 
          {/* the children of a prop is anything in between the two brackets of the component */}
